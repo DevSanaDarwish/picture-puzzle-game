@@ -8,6 +8,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install Visual Studio Build Tools
+      run: |
+        choco install visualstudio2019buildtools --version=16.11.4 --params="'/IncludeRecommended /NoRestart'" -y
     - name: Install .NET Framework 4.8
       run: |
         Start-Process -FilePath "powershell.exe" -ArgumentList "-Command", "Invoke-WebRequest -Uri 'https://download.microsoft.com/download/1/D/8/1D8D60B2-1995-45F7-AD69-6D2B3C7A4C74/NDP48-x86-x64.exe' -OutFile 'dotNetFx48.exe'; Start-Process -FilePath 'dotNetFx48.exe' -ArgumentList '/quiet /norestart' -Wait"
