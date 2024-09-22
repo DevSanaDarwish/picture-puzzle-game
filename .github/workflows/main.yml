@@ -8,13 +8,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0
+    - name: Setup .NET Framework
+      run: |
+        choco install dotnetfx --version=4.8.0  # تثبيت .NET Framework 4.8
     - name: Install dependencies
-      run: dotnet restore
+      run: nuget restore  # استخدام nuget لاستعادة الحزم
     - name: Build project
-      run: dotnet build --configuration Release
+      run: msbuild /p:Configuration=Release  # استخدام msbuild للبناء
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: vstest.console <path-to-your-test-assembly>  # استخدم أمر مناسب لتشغيل الاختبارات
